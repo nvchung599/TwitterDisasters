@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 #from sklearn import
+from general import *
 
 df = pd.read_csv('train.csv')
 
@@ -13,10 +14,7 @@ df_train = df[mask]
 df_test = df[~mask]
 
 """TRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAINTRAIN"""
-corpus = []
-for i in range(df_train.shape[0]):
-    corpus.append(df.iloc[i][3])
-
+corpus = get_corpus(df_train)
 vectorizer = CountVectorizer()
 x_train = vectorizer.fit_transform(corpus)
 y_train = df_train.to_numpy()[:,4].astype('int')
@@ -30,10 +28,7 @@ print(log_reg.score(x_train, y_train))
 
 
 """TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"""
-corpus = []
-for i in range(df_test.shape[0]):
-    corpus.append(df.iloc[i][3])
-
+corpus = get_corpus(df_test)
 x_test = vectorizer.transform(corpus)
 y_test = df_test.to_numpy()[:,4].astype('int')
 
